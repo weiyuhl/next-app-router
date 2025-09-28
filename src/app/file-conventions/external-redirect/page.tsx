@@ -29,10 +29,15 @@ function ExternalRedirectContent() {
     // 使用document.referrer获取上一个页面URL
     const referrer = document.referrer;
     
+    console.log('当前referrer:', referrer);
+    console.log('当前origin:', window.location.origin);
+    
     // 如果有referrer且不为空，且referrer是同域名的，则返回referrer页面
     if (referrer && referrer.length > 0 && referrer.includes(window.location.origin)) {
+      console.log('返回到referrer页面:', referrer);
       window.location.href = referrer;
     } else {
+      console.log('返回到首页');
       // 否则跳转到首页
       router.push('/');
     }

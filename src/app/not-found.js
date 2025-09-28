@@ -114,7 +114,10 @@ function NotFoundContent() {
             <div className="text-sm text-muted-foreground space-y-2">
               <div><strong>状态码：</strong>{errorInfo.statusCode} {errorInfo.statusText}</div>
               <div><strong>错误原因：</strong>{errorInfo.reason}</div>
-              <div><strong>请求路径：</strong><span className="font-mono text-yellow-600">{pathname}</span></div>
+              <div><strong>当前路径：</strong><span className="font-mono text-yellow-600">{pathname}</span></div>
+              {searchParams.get('original_path') && (
+                <div><strong>原始请求：</strong><span className="font-mono text-red-600">{searchParams.get('original_path')}</span></div>
+              )}
             </div>
           </div>
 
