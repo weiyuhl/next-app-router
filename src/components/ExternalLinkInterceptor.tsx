@@ -6,7 +6,7 @@ export default function ExternalLinkInterceptor() {
   useEffect(() => {
     // 为所有外部链接添加安全属性
     const addSecurityAttributes = () => {
-      const allLinks = Array.from(document.querySelectorAll('a[href]'));
+      const allLinks = Array.from(document.querySelectorAll('a[href]')) as HTMLAnchorElement[];
       const currentHost = window.location.hostname;
       
       allLinks.forEach(link => {

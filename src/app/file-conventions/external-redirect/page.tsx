@@ -2,10 +2,10 @@
 
 import { Shield, ExternalLink, Home } from "lucide-react";
 import Header from "@/components/Header";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
-export default function ExternalRedirectPage() {
+function ExternalRedirectContent() {
   const [targetUrl, setTargetUrl] = useState('');
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -104,5 +104,20 @@ export default function ExternalRedirectPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function ExternalRedirectPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p>正在加载...</p>
+        </div>
+      </div>
+    }>
+      <ExternalRedirectContent />
+    </Suspense>
   );
 }
