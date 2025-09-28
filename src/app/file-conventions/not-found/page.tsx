@@ -27,32 +27,32 @@ export default function NotFoundPage() {
         </div>
 
         <div className="space-y-8">
-          {/* Demo Entry */}
-          <Card className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border-yellow-500/20">
+          {/* Not-Found Information */}
+          <Card className="bg-gradient-to-br from-blue-500/10 to-green-500/10 border-blue-500/20">
             <CardHeader className="text-center">
-              <CardTitle className="text-2xl text-yellow-600">
-                🔍 Not-Found.js Live Demo
+              <CardTitle className="text-2xl text-blue-600">
+                ✅ 404错误处理系统已就绪
               </CardTitle>
               <p className="text-muted-foreground">
-                Experience how Next.js&apos;s not-found.js file convention works
+                Next.js not-found.js 文件约定已配置完成
               </p>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="text-center mb-6">
                 <p className="text-muted-foreground mb-4">
-                  Click the button below to enter a dedicated demo page that calls the notFound() function, truly triggering the display of not-found.js.
+                  404错误处理系统已经配置完成，支持动态状态码显示和中文化界面。
                 </p>
               </div>
 
               <div className="text-center">
-                <Button asChild size="lg" className="bg-yellow-600 hover:bg-yellow-700 text-lg px-8 py-6 cursor-pointer">
-                  <Link href="/file-conventions/not-found/demo">
+                <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-6 cursor-pointer">
+                  <Link href="/test-error">
                     <Play className="w-5 h-5 mr-2" />
-                    Enter Not-Found.js Demo
+                    测试404错误处理
                   </Link>
                 </Button>
                 <p className="text-sm text-muted-foreground mt-2">
-                  The demo page will call the notFound() function and then display the not-found.js UI
+                  访问测试页面体验完整的404错误处理功能
                 </p>
               </div>
             </CardContent>
@@ -61,21 +61,19 @@ export default function NotFoundPage() {
           {/* File Structure */}
           <Card className="bg-muted/30 border-border/20">
             <CardHeader>
-              <CardTitle>Current File Structure</CardTitle>
+              <CardTitle>当前文件结构</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="bg-background/50 p-4 rounded-lg border border-border/20">
                 <div className="font-mono text-sm text-muted-foreground space-y-1">
                   <div>app/file-conventions/not-found/</div>
-                  <div>├── not-found.js       ← This file defines the 404 UI</div>
-                  <div>├── page.tsx           ← Current entry page (synchronous)</div>
-                  <div>└── demo/</div>
-                  <div>&nbsp;&nbsp;&nbsp;&nbsp;└── page.tsx     ← Demo page (calls notFound(), triggering not-found.js)</div>
+                  <div>├── not-found.js       ← 定义404错误处理界面</div>
+                  <div>└── page.tsx           ← 当前介绍页面</div>
                 </div>
               </div>
-              <div className="mt-4 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
-                <p className="text-sm text-yellow-600 font-medium">
-                  ✅ The demo page will truly call notFound() and trigger not-found.js, while the entry page remains stable
+              <div className="mt-4 p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
+                <p className="text-sm text-green-600 font-medium">
+                  ✅ 404错误处理系统已配置完成，具备生产环境使用条件。
                 </p>
               </div>
             </CardContent>

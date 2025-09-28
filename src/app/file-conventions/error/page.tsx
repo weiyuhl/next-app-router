@@ -27,32 +27,32 @@ export default function ErrorPage() {
         </div>
 
         <div className="space-y-8">
-          {/* Demo Entry */}
-          <Card className="bg-gradient-to-br from-red-500/10 to-orange-500/10 border-red-500/20">
+          {/* Error Handling Information */}
+          <Card className="bg-gradient-to-br from-blue-500/10 to-green-500/10 border-blue-500/20">
             <CardHeader className="text-center">
-              <CardTitle className="text-2xl text-red-600">
-                🚨 Error.js Live Demo
+              <CardTitle className="text-2xl text-blue-600">
+                ✅ 错误处理系统已就绪
               </CardTitle>
               <p className="text-muted-foreground">
-                Experience how Next.js&apos;s error.js file convention works
+                Next.js error.js 文件约定已配置完成
               </p>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="text-center mb-6">
                 <p className="text-muted-foreground mb-4">
-                  Click the button below to enter a dedicated demo page that will throw an error, truly triggering the display of error.js.
+                  错误处理系统已经配置完成，包含智能错误分析、中文化界面和重试功能。
                 </p>
               </div>
 
               <div className="text-center">
-                <Button asChild size="lg" className="bg-red-600 hover:bg-red-700 text-lg px-8 py-6 cursor-pointer">
-                  <Link href="/file-conventions/error/demo">
+                <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-6 cursor-pointer">
+                  <Link href="/test-error">
                     <Play className="w-5 h-5 mr-2" />
-                    Enter Error.js Demo
+                    测试错误处理功能
                   </Link>
                 </Button>
                 <p className="text-sm text-muted-foreground mt-2">
-                  The demo page will throw a real error, then display the error.js UI.
+                  访问测试页面体验完整的错误处理功能
                 </p>
               </div>
             </CardContent>
@@ -62,21 +62,19 @@ export default function ErrorPage() {
           {/* File Structure */}
           <Card className="bg-muted/30 border-border/20">
             <CardHeader>
-              <CardTitle>Current File Structure</CardTitle>
+              <CardTitle>当前文件结构</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="bg-background/50 p-4 rounded-lg border border-border/20">
                 <div className="font-mono text-sm text-muted-foreground space-y-1">
                   <div>app/file-conventions/error/</div>
-                  <div>├── error.js          ← This file defines the error UI</div>
-                  <div>├── page.tsx          ← Current entry page (synchronous)</div>
-                  <div>└── demo/</div>
-                  <div>&nbsp;&nbsp;&nbsp;&nbsp;└── page.tsx    ← Demo page (will throw an error, triggering error.js)</div>
+                  <div>├── error.js          ← 定义错误处理界面</div>
+                  <div>└── page.tsx          ← 当前介绍页面</div>
                 </div>
               </div>
-              <div className="mt-4 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-                <p className="text-sm text-red-600 font-medium">
-                  ✅ The demo page will genuinely throw an error and trigger error.js, while the entry page remains stable.
+              <div className="mt-4 p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
+                <p className="text-sm text-green-600 font-medium">
+                  ✅ 错误处理系统已配置完成，具备生产环境使用条件。
                 </p>
               </div>
             </CardContent>
