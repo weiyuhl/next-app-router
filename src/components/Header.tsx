@@ -2,10 +2,18 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currentOrigin, setCurrentOrigin] = useState("");
+
+  useEffect(() => {
+    // 获取当前域名和协议
+    if (typeof window !== "undefined") {
+      setCurrentOrigin(window.location.origin);
+    }
+  }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -36,7 +44,7 @@ export default function Header() {
         {/* Desktop Layout */}
         <div className="hidden lg:flex items-center justify-between">
           <div className="flex items-center space-x-8">
-            <a href="https://pages.edgeone.ai" target="_blank" rel="noopener noreferrer">
+            <a href={currentOrigin}>
               <div className="flex items-center space-x-3">
                 <div className="w-6 h-6 rounded-full flex items-center justify-center">
                   <Image
@@ -94,7 +102,7 @@ export default function Header() {
 
         {/* Mobile Layout */}
         <div className="lg:hidden flex items-center justify-between">
-          <a href="/" target="_blank" rel="noopener noreferrer">
+          <a href={currentOrigin}>
             <div className="flex items-center space-x-2">
               <div className="w-5 h-5 rounded-full flex items-center justify-center">
                 <Image
