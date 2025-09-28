@@ -1,32 +1,43 @@
+import { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Globe, Heart, Users, Target, ArrowLeft, Mail, Phone, MapPin } from "lucide-react";
 import Header from "@/components/Header";
 import Link from "next/link";
 
+export const metadata: Metadata = {
+  title: "关于我们",
+  description: "了解我们的使命、愿景和团队，我们致力于提供优质的技术解决方案",
+  keywords: ["关于我们", "公司介绍", "团队", "使命", "愿景"],
+  openGraph: {
+    title: "关于我们 | Next.js App Router Demo",
+    description: "了解我们的使命、愿景和团队，我们致力于提供优质的技术解决方案",
+  },
+};
+
 export default function AboutPage() {
   const features = [
     {
-      title: "Innovative Technology",
-      description: "Utilizing the latest Next.js and modern frontend tech stack",
+      title: "创新技术",
+      description: "采用最新的 Next.js 和现代前端技术栈",
       icon: Target,
       color: "text-blue-600"
     },
     {
-      title: "User Experience",
-      description: "Focused on delivering excellent user experience and interface design",
+      title: "用户体验",
+      description: "专注于提供卓越的用户体验和界面设计",
       icon: Heart,
       color: "text-red-600"
     },
     {
-      title: "Team Collaboration",
-      description: "Possessing a professional development team and a complete collaboration process",
+      title: "团队协作",
+      description: "拥有专业的开发团队和完整的协作流程",
       icon: Users,
       color: "text-green-600"
     },
     {
-      title: "Global Service",
-      description: "Committed to providing stable and reliable services to global users",
+      title: "全球服务",
+      description: "致力于为全球用户提供稳定可靠的服务",
       icon: Globe,
       color: "text-purple-600"
     }
@@ -40,34 +51,33 @@ export default function AboutPage() {
           <Button asChild variant="outline" size="sm" className="cursor-pointer">
             <Link href="/layouts/route-groups">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Route Groups Demo
+              返回路由组演示
             </Link>
           </Button>
         </div>
 
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent mb-4">
-            About Us
+            关于我们
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            This page is located within the <code className="bg-muted px-2 py-1 rounded text-primary">(public)</code> Route Group,
-            at path <code className="bg-muted px-2 py-1 rounded text-primary">/layouts/route-groups/about</code>
+            这个页面现在位于根目录下，可以直接通过 <code className="bg-muted px-2 py-1 rounded text-primary">/about</code> 路径访问
           </p>
         </div>
 
         <div className="max-w-4xl mx-auto space-y-8">
-          {/* Company Introduction */}
+          {/* 公司介绍 */}
           <Card className="bg-gradient-to-br from-primary/10 to-blue-500/10 border-primary/20">
             <CardHeader className="text-center">
-              <CardTitle className="text-2xl">Our Mission</CardTitle>
+              <CardTitle className="text-2xl">我们的使命</CardTitle>
             </CardHeader>
             <CardContent className="text-center space-y-4">
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Dedicated to providing exceptional digital experiences through innovative technological solutions.
-                We focus on Next.js application development, striving for a perfect balance between code quality and user experience.
+                致力于通过创新的技术解决方案提供卓越的数字体验。
+                我们专注于 Next.js 应用开发，追求代码质量与用户体验的完美平衡。
               </p>
               <p className="text-muted-foreground">
-                We believe in the power of technology to change the world, allowing everyone to enjoy the convenience it brings.
+                我们相信技术的力量能够改变世界，让每个人都能享受到技术带来的便利。
               </p>
             </CardContent>
           </Card>
@@ -91,61 +101,61 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {/* Contact Information */}
+          {/* Company Information */}
           <Card className="bg-muted/30 border-border/20">
             <CardHeader>
-              <CardTitle>Contact Us</CardTitle>
+              <CardTitle>公司信息</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="flex items-center space-x-3">
-                  <Mail className="w-5 h-5 text-primary" />
+                  <Users className="w-5 h-5 text-primary" />
                   <div>
-                    <p className="font-medium">Email</p>
-                    <p className="text-sm text-muted-foreground">contact@example.com</p>
+                    <p className="font-medium">成立时间</p>
+                    <p className="text-sm text-muted-foreground">成立于 2020 年</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <Phone className="w-5 h-5 text-primary" />
+                  <Users className="w-5 h-5 text-primary" />
                   <div>
-                    <p className="font-medium">Phone</p>
-                    <p className="text-sm text-muted-foreground">+1 555 123 4567</p>
+                    <p className="font-medium">团队规模</p>
+                    <p className="text-sm text-muted-foreground">团队规模：50+ 人</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <MapPin className="w-5 h-5 text-primary" />
+                  <Globe className="w-5 h-5 text-primary" />
                   <div>
-                    <p className="font-medium">Address</p>
-                    <p className="text-sm text-muted-foreground">123 Tech Park, Anytown, USA</p>
+                    <p className="font-medium">服务范围</p>
+                    <p className="text-sm text-muted-foreground">服务全球客户</p>
                   </div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          {/* Route Group Explanation */}
+          {/* 路由组说明 */}
           <Card className="bg-muted/30 border-border/20">
             <CardHeader>
-              <CardTitle>Public Page Characteristics of Route Group</CardTitle>
+              <CardTitle>页面路由特性</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div>
-                  <h4 className="font-medium mb-2">Current Path Structure</h4>
+                  <h4 className="font-medium mb-2">当前路径结构</h4>
                   <div className="bg-background/50 p-3 rounded border font-mono text-xs">
-                    <div>File Path: app/layouts/route-groups/(public)/about/page.tsx</div>
-                    <div>URL Path: /layouts/route-groups/about</div>
-                    <div>Route Group: (public)</div>
-                    <div>Characteristic: Publicly Accessible Page</div>
+                    <div>文件路径: app/about/page.tsx</div>
+                    <div>URL 路径: /about</div>
+                    <div>路由类型: 根目录路由</div>
+                    <div>特性: 直接访问页面</div>
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-medium mb-2">Public Page Features</h4>
+                  <h4 className="font-medium mb-2">页面特性</h4>
                   <ul className="text-muted-foreground space-y-1">
-                    <li>• Located within the (public) route group</li>
-                    <li>• Accessible without special permissions</li>
-                    <li>• Suitable for company information, help documentation, etc.</li>
-                    <li>• Can be optimized for SEO</li>
+                    <li>• 位于应用根目录下</li>
+                    <li>• 可直接通过 /about 访问</li>
+                    <li>• 适合公司信息、帮助文档等</li>
+                    <li>• 可进行 SEO 优化</li>
                   </ul>
                 </div>
               </div>

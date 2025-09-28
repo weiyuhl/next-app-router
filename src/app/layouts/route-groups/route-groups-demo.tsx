@@ -37,7 +37,7 @@ export default function RouteGroupsDemo() {
       icon: Globe,
       description: "Publicly accessible pages",
       routes: [
-        { path: "/layouts/route-groups/about", name: "About", description: "About Us", realPath: "/layouts/route-groups/about" },
+        { path: "/about", name: "About", description: "About Us", realPath: "/about" },
       ],
       color: "border-green-500/30 bg-green-500/10"
     }
@@ -122,4 +122,4 @@ export default function RouteGroupsDemo() {
       )}
     </div>
   );
-} 
+}
