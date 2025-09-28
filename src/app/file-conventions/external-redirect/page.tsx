@@ -70,15 +70,16 @@ function ExternalRedirectContent() {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row md:flex-row lg:flex-row gap-3">
             {targetUrl ? (
-              <a
-                href={targetUrl}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
+              <button
+                onClick={() => {
+                  // 直接使用window.open避免被拦截器拦截
+                  window.open(targetUrl, '_blank', 'noopener,noreferrer');
+                }}
                 className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-2.5 md:py-3 lg:py-3.5 px-4 md:px-5 lg:px-6 rounded-lg transition-colors flex items-center justify-center space-x-2 text-sm md:text-base"
               >
                 <ExternalLink className="w-4 h-4" />
                 <span>确认跳转</span>
-              </a>
+              </button>
             ) : (
               <div className="flex-1 bg-gray-400 text-white font-medium py-2.5 md:py-3 lg:py-3.5 px-4 md:px-5 lg:px-6 rounded-lg flex items-center justify-center space-x-2 text-sm md:text-base">
                 <ExternalLink className="w-4 h-4" />
