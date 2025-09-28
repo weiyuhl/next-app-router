@@ -25,8 +25,17 @@ function ExternalRedirectContent() {
     }
   }, [searchParams, router]);
 
-  const handleGoHome = () => {
-    router.push('/');
+  const handleGoBack = () => {
+    // 使用document.referrer获取上一个页面URL
+    const referrer = document.referrer;
+    
+    // 如果有referrer且不为空，且referrer是同域名的，则返回referrer页面
+    if (referrer && referrer.length > 0 && referrer.includes(window.location.origin)) {
+      window.location.href = referrer;
+    } else {
+      // 否则跳转到首页
+      router.push('/');
+    }
   };
 
   const getDomainFromUrl = (url: string) => {
@@ -88,11 +97,11 @@ function ExternalRedirectContent() {
             )}
             
             <button
-              onClick={handleGoHome}
+              onClick={handleGoBack}
               className="flex-1 bg-muted hover:bg-muted/80 text-muted-foreground font-medium py-2.5 md:py-3 lg:py-3.5 px-4 md:px-5 lg:px-6 rounded-lg transition-colors flex items-center justify-center space-x-2 text-sm md:text-base"
             >
               <Home className="w-4 h-4" />
-              <span>返回首页</span>
+              <span>返回</span>
             </button>
           </div>
 
