@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
-export default function NotFound() {
+function NotFoundContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [errorInfo, setErrorInfo] = useState({
@@ -130,5 +130,20 @@ export default function NotFound() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function NotFound() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-500 mx-auto"></div>
+          <p className="mt-2 text-gray-600">加载中...</p>
+        </div>
+      </div>
+    }>
+      <NotFoundContent />
+    </Suspense>
   );
 }
