@@ -1,13 +1,9 @@
 import { Button } from "@/components/ui/button";
 import RouteGroupsDemo from "./route-groups-demo";
-import Header from "@/components/Header";
 
 export default function RouteGroupsPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Header */}
-      <Header />
-
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12">
         {/* Title Section */}
@@ -33,4 +29,4 @@ export default function RouteGroupsPage() {
       </main>
     </div>
   );
-} 
+}

@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import Header from "@/components/Header";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -10,8 +9,6 @@ interface NestedLayoutsLayoutProps {
 export default function NestedLayoutsLayout({ children }: NestedLayoutsLayoutProps) {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
-      
       {/* Nested Layout Container */}
       <div className="container mx-auto px-4 py-8">
         {/* Navigation Tabs */}
@@ -74,4 +71,4 @@ export default function NestedLayoutsLayout({ children }: NestedLayoutsLayoutPro
       </div>
     </div>
   );
-} 
+}

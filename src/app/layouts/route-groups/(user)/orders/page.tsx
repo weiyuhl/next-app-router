@@ -2,7 +2,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 // import { Badge } from "@/components/ui/badge";
 import { ShoppingCart, Calendar, DollarSign, ArrowLeft, Package, Truck } from "lucide-react";
-import Header from "@/components/Header";
 import Link from "next/link";
 
 export default function OrdersPage() {
@@ -35,7 +34,6 @@ export default function OrdersPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="mb-6">
           <Button asChild variant="outline" size="sm" className="cursor-pointer">
@@ -159,4 +157,4 @@ export default function OrdersPage() {
       </main>
     </div>
   );
-} 
+}

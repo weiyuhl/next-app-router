@@ -2,7 +2,6 @@
 
 import { FileQuestion, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Header from "@/components/Header";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
@@ -91,7 +90,6 @@ function NotFoundContent() {
   
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
       <main className="container mx-auto px-4 py-8 flex items-center justify-center min-h-[calc(100vh-80px)]">
         <div className="text-center space-y-6 max-w-md mx-auto px-4">
           {/* Error Icon */}

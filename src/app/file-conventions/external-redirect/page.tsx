@@ -1,7 +1,6 @@
 'use client';
 
 import { Shield, ExternalLink, Home } from "lucide-react";
-import Header from "@/components/Header";
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
@@ -53,7 +52,6 @@ function ExternalRedirectContent() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
       <main className="container mx-auto px-4 py-8 flex items-center justify-center min-h-[calc(100vh-80px)]">
         <div className="text-center space-y-6 w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto px-4">
           {/* Main Security Icon */}

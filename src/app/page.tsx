@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
@@ -7,9 +6,6 @@ import { FileText, Layout, Route, Zap, AlertTriangle, Search } from "lucide-reac
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Header */}
-      <Header />
-
       {/* Main Content */}
       <main className="container mx-auto px-4 py-16">
         {/* Hero Section */}

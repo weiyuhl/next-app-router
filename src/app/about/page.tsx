@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Globe, Heart, Users, Target, ArrowLeft, Mail, Phone, MapPin } from "lucide-react";
-import Header from "@/components/Header";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -45,7 +44,6 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="mb-6">
           <Button asChild variant="outline" size="sm" className="cursor-pointer">

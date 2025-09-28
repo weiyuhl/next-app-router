@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import Header from "@/components/Header";
 import { AlertTriangle, Bug, Wifi, Clock, Lock, Ban } from "lucide-react";
 
 export default function TestErrorPage() {
@@ -70,7 +69,6 @@ export default function TestErrorPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">

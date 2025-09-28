@@ -2,7 +2,6 @@
 
 import { AlertTriangle, RefreshCw, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Header from "@/components/Header";
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -66,7 +65,6 @@ export default function Error({ error, reset }) {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
       <main className="container mx-auto px-4 py-8 flex items-center justify-center min-h-[calc(100vh-80px)]">
         <div className="text-center space-y-6 max-w-md mx-auto px-4">
           {/* Error Icon */}

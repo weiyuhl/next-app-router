@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import { ReactNode } from "react";
 
 interface ParallelRoutesLayoutProps {
@@ -16,7 +15,6 @@ export default function ParallelRoutesLayout({
 }: ParallelRoutesLayoutProps) {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
