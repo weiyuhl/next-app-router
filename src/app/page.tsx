@@ -21,12 +21,12 @@ export default function Home() {
             Interactively demonstrates the core features of Next.js App Router, for exploring functionalities like Nested layouts, Loading, and more.
           </p>
           <div className="flex justify-center space-x-4">
-            <a href="https://edgeone.ai/pages/new?from=github&template=next-app-router-template" target="_blank" rel="noopener noreferrer">
+            <a href="https://edgeone.ai/pages/new?from=github&template=next-app-router-template">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer">
                 Deploy Now
               </Button>
             </a>
-            <a href="https://pages.edgeone.ai/document/framework-nextjs" target="_blank" rel="noopener noreferrer">
+            <a href="https://pages.edgeone.ai/document/framework-nextjs">
               <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200 cursor-pointer">
                 View Documentation
               </Button>

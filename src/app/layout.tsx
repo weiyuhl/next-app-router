@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ExternalLinkInterceptor from "@/components/ExternalLinkInterceptor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,13 +24,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="zh-CN">
       <head>
         <link rel="icon" href="/eo-logo-blue.svg" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <ExternalLinkInterceptor />
         {children}
       </body>
     </html>
