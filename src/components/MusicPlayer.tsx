@@ -5,17 +5,17 @@ import { Play, Pause, SkipBack, SkipForward } from 'lucide-react';
 
 interface Song {
   id: number;
-  title: string;
-  artist: string;
   src: string;
 }
 
 const sampleSongs: Song[] = [
   {
-    id: 2,
-    title: '网易云音乐 2',
-    artist: '在线音乐',
+    id: 1,
     src: 'http://music.163.com/song/media/outer/url?id=2693613520.mp3'
+  },
+  {
+    id: 2,
+    src: 'http://aqqmusic.tc.qq.com/C400002SJnnO1ZMocs.m4a?guid=688060073&vkey=70223874CBE5B6DA1BC13155AAF894E6208DC0847E78743A0D9ED29A6CC2E63D9658FFBD2E58BAD601F512DCEA8B941B26A25A855216E56C__v2b9ab85d&uin=&fromtag=120032&src=C400001ls4xT39RIpD.m4a'
   }
 ];
 
