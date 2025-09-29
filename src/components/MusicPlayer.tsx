@@ -8,16 +8,7 @@ interface Song {
   src: string;
 }
 
-const sampleSongs: Song[] = [
-  {
-    id: 1,
-    src: 'http://music.163.com/song/media/outer/url?id=2693613520.mp3'
-  },
-  {
-    id: 2,
-    src: 'http://aqqmusic.tc.qq.com/C400002SJnnO1ZMocs.m4a?guid=688060073&vkey=70223874CBE5B6DA1BC13155AAF894E6208DC0847E78743A0D9ED29A6CC2E63D9658FFBD2E58BAD601F512DCEA8B941B26A25A855216E56C__v2b9ab85d&uin=&fromtag=120032&src=C400001ls4xT39RIpD.m4a'
-  }
-];
+const sampleSongs: Song[] = [];
 
 // 全局音频实例，避免页面导航时重置
 let globalAudio: HTMLAudioElement | null = null;
@@ -34,7 +25,7 @@ export default function MusicPlayer() {
 
   // 初始化全局音频实例
   useEffect(() => {
-    if (!globalAudio && typeof window !== 'undefined') {
+    if (!globalAudio && typeof window !== 'undefined' && sampleSongs.length > 0) {
       globalAudio = new Audio();
       globalAudio.src = sampleSongs[globalCurrentSong].src;
       
@@ -73,7 +64,7 @@ export default function MusicPlayer() {
   }, []);
 
   const togglePlay = () => {
-    if (globalAudio) {
+    if (globalAudio && sampleSongs.length > 0) {
       if (globalIsPlaying) {
         globalAudio.pause();
         globalIsPlaying = false;
@@ -99,6 +90,8 @@ export default function MusicPlayer() {
   };
 
   const nextSong = () => {
+    if (sampleSongs.length === 0) return;
+    
     const nextIndex = (globalCurrentSong + 1) % sampleSongs.length;
     globalCurrentSong = nextIndex;
     setCurrentSong(nextIndex);
@@ -125,6 +118,8 @@ export default function MusicPlayer() {
   };
 
   const prevSong = () => {
+    if (sampleSongs.length === 0) return;
+    
     const prevIndex = globalCurrentSong === 0 ? sampleSongs.length - 1 : globalCurrentSong - 1;
     globalCurrentSong = prevIndex;
     setCurrentSong(prevIndex);
@@ -188,47 +183,51 @@ export default function MusicPlayer() {
   }, []);
 
   return (
-    <div className="fixed bottom-8 right-4 z-50" ref={playerRef}>
-      {/* 移除本地audio元素，使用全局音频实例 */}
-      
-      <div className={`bg-white/90 backdrop-blur-sm border rounded-lg shadow-lg transition-all duration-300 ${
-        isCollapsed ? 'p-1 opacity-40' : 'p-2'
-      }`}>
-        {isCollapsed ? (
-          <button
-            onClick={handleCollapsedClick}
-            className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center"
-          >
-            {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
-          </button>
-        ) : (
-          <div className="flex items-center space-x-1.5">
-            <button
-              onClick={prevSong}
-              className="w-7 h-7 p-0 rounded-full flex items-center justify-center"
-              style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-            >
-              <SkipBack className="w-3.5 h-3.5" />
-            </button>
-            
-            <button
-              onClick={togglePlay}
-              className="w-7 h-7 p-0 rounded-full flex items-center justify-center"
-              style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-            >
-              {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-            </button>
-            
-            <button
-              onClick={nextSong}
-              className="w-7 h-7 p-0 rounded-full flex items-center justify-center"
-              style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-            >
-              <SkipForward className="w-3.5 h-3.5" />
-            </button>
+    <>
+      {sampleSongs.length > 0 && (
+        <div className="fixed bottom-8 right-4 z-50" ref={playerRef}>
+          {/* 移除本地audio元素，使用全局音频实例 */}
+          
+          <div className={`bg-white/90 backdrop-blur-sm border rounded-lg shadow-lg transition-all duration-300 ${
+            isCollapsed ? 'p-1 opacity-40' : 'p-2'
+          }`}>
+            {isCollapsed ? (
+              <button
+                onClick={handleCollapsedClick}
+                className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center"
+              >
+                {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
+              </button>
+            ) : (
+              <div className="flex items-center space-x-1.5">
+                <button
+                  onClick={prevSong}
+                  className="w-7 h-7 p-0 rounded-full flex items-center justify-center"
+                  style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                >
+                  <SkipBack className="w-3.5 h-3.5" />
+                </button>
+                
+                <button
+                  onClick={togglePlay}
+                  className="w-7 h-7 p-0 rounded-full flex items-center justify-center"
+                  style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                >
+                  {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                </button>
+                
+                <button
+                  onClick={nextSong}
+                  className="w-7 h-7 p-0 rounded-full flex items-center justify-center"
+                  style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                >
+                  <SkipForward className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 }
