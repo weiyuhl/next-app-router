@@ -36,6 +36,22 @@ export default function TestErrorPage() {
         default:
           // 模拟通用错误
           throw new Error('Something went wrong');
+          
+        case 'database':
+          // 模拟数据库错误
+          throw new Error('Database connection failed: unable to connect to database server');
+          
+        case 'validation':
+          // 模拟数据验证错误
+          throw new Error('Validation failed: invalid data format provided');
+          
+        case 'memory':
+          // 模拟内存不足错误
+          throw new Error('Out of memory: heap limit exceeded during operation');
+          
+        case 'ratelimit':
+          // 模拟频率限制错误
+          throw new Error('Rate limit exceeded: too many requests in short time');
       }
     } catch (error) {
       setLoading(false);
@@ -148,6 +164,46 @@ export default function TestErrorPage() {
                 >
                   <Bug className="w-4 h-4 mr-2" />
                   通用错误 (500)
+                </Button>
+                
+                <Button 
+                  onClick={() => triggerError('database')} 
+                  disabled={loading}
+                  className="w-full justify-start"
+                  variant="outline"
+                >
+                  <AlertTriangle className="w-4 h-4 mr-2" />
+                  数据库错误 (503)
+                </Button>
+                
+                <Button 
+                  onClick={() => triggerError('validation')} 
+                  disabled={loading}
+                  className="w-full justify-start"
+                  variant="outline"
+                >
+                  <Ban className="w-4 h-4 mr-2" />
+                  数据验证错误 (400)
+                </Button>
+                
+                <Button 
+                  onClick={() => triggerError('memory')} 
+                  disabled={loading}
+                  className="w-full justify-start"
+                  variant="outline"
+                >
+                  <AlertTriangle className="w-4 h-4 mr-2" />
+                  内存不足错误 (507)
+                </Button>
+                
+                <Button 
+                  onClick={() => triggerError('ratelimit')} 
+                  disabled={loading}
+                  className="w-full justify-start"
+                  variant="outline"
+                >
+                  <Clock className="w-4 h-4 mr-2" />
+                  频率限制错误 (429)
                 </Button>
               </div>
             </div>

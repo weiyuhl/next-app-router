@@ -155,22 +155,6 @@ Implements true parallel routing features:
 - Doesn't affect SEO and performance
 - Real demonstration of async component loading
 
-#### Error UI (`error.js`)
-**Path**: `/file-conventions/error`
-
-- Automatically captures component errors
-- Graceful degradation handling
-- Provides error recovery mechanisms
-- Prevents application crashes
-
-#### Not Found UI (`not-found.js`)
-**Path**: `/file-conventions/not-found`
-
-- Custom 404 pages
-- Supports `notFound()` function calls
-- Maintains complete application structure
-- User-friendly guidance
-
 ## 🔧 Technical Implementation
 
 ### Layout System

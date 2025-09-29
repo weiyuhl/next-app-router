@@ -9,14 +9,28 @@ export default function Error({ error, reset }) {
   useEffect(() => {
     // 记录错误到控制台
     console.error('应用错误:', error);
+    
+    // 可选：发送错误到监控服务
+    // 例如：Sentry, LogRocket, 或自定义错误追踪服务
+    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
+      // 示例：发送错误到监控服务
+      // sendErrorToMonitoring({
+      //   message: error?.message,
+      //   stack: error?.stack,
+      //   timestamp: new Date().toISOString(),
+      //   userAgent: navigator.userAgent,
+      //   url: window.location.href
+      // });
+    }
   }, [error]);
 
   // 根据错误类型确定状态码和消息
   const getErrorInfo = () => {
     const message = error?.message || "发生了未知错误";
+    const lowerMessage = message.toLowerCase();
     
-    // 检查常见的错误类型
-    if (message.includes('fetch') || message.includes('network')) {
+    // 网络相关错误
+    if (lowerMessage.includes('fetch') || lowerMessage.includes('network') || lowerMessage.includes('connection refused')) {
       return {
         statusCode: 503,
         statusText: "Service Unavailable",
@@ -25,7 +39,8 @@ export default function Error({ error, reset }) {
       };
     }
     
-    if (message.includes('timeout')) {
+    // 超时错误
+    if (lowerMessage.includes('timeout') || lowerMessage.includes('timed out')) {
       return {
         statusCode: 408,
         statusText: "Request Timeout",
@@ -34,7 +49,8 @@ export default function Error({ error, reset }) {
       };
     }
     
-    if (message.includes('unauthorized') || message.includes('401')) {
+    // 认证和授权错误
+    if (lowerMessage.includes('unauthorized') || lowerMessage.includes('401') || lowerMessage.includes('authentication')) {
       return {
         statusCode: 401,
         statusText: "Unauthorized",
@@ -43,12 +59,134 @@ export default function Error({ error, reset }) {
       };
     }
     
-    if (message.includes('forbidden') || message.includes('403')) {
+    if (lowerMessage.includes('forbidden') || lowerMessage.includes('403') || lowerMessage.includes('access denied')) {
       return {
         statusCode: 403,
         statusText: "Forbidden",
         reason: "您没有权限访问此资源",
         canRetry: false
+      };
+    }
+    
+    // 数据相关错误
+    if (lowerMessage.includes('database') || lowerMessage.includes('db connection') || lowerMessage.includes('connection timeout')) {
+      return {
+        statusCode: 503,
+        statusText: "Database Unavailable",
+        reason: "数据库连接失败，请稍后重试",
+        canRetry: true
+      };
+    }
+    
+    if (lowerMessage.includes('validation') || lowerMessage.includes('invalid data') || lowerMessage.includes('bad request')) {
+      return {
+        statusCode: 400,
+        statusText: "Bad Request",
+        reason: "数据格式错误或验证失败",
+        canRetry: false
+      };
+    }
+    
+    if (lowerMessage.includes('json') || lowerMessage.includes('parse') || lowerMessage.includes('syntax error')) {
+      return {
+        statusCode: 422,
+        statusText: "Unprocessable Entity",
+        reason: "数据解析错误",
+        canRetry: false
+      };
+    }
+    
+    // 文件系统错误
+    if (lowerMessage.includes('enoent') || lowerMessage.includes('file not found') || lowerMessage.includes('no such file')) {
+      return {
+        statusCode: 404,
+        statusText: "File Not Found",
+        reason: "请求的文件不存在",
+        canRetry: false
+      };
+    }
+    
+    if (lowerMessage.includes('eacces') || lowerMessage.includes('permission denied') || lowerMessage.includes('access is denied')) {
+      return {
+        statusCode: 403,
+        statusText: "Permission Denied",
+        reason: "文件访问权限不足",
+        canRetry: false
+      };
+    }
+    
+    if (lowerMessage.includes('enospc') || lowerMessage.includes('no space left') || lowerMessage.includes('disk full')) {
+      return {
+        statusCode: 507,
+        statusText: "Insufficient Storage",
+        reason: "存储空间不足",
+        canRetry: false
+      };
+    }
+    
+    // 内存和资源错误
+    if (lowerMessage.includes('out of memory') || lowerMessage.includes('heap limit') || lowerMessage.includes('memory exceeded')) {
+      return {
+        statusCode: 507,
+        statusText: "Insufficient Storage",
+        reason: "内存不足，请稍后重试",
+        canRetry: true
+      };
+    }
+    
+    if (lowerMessage.includes('too many') || lowerMessage.includes('resource exhausted') || lowerMessage.includes('limit exceeded')) {
+      return {
+        statusCode: 429,
+        statusText: "Too Many Requests",
+        reason: "资源使用超限，请稍后重试",
+        canRetry: true
+      };
+    }
+    
+    // API和外部服务错误
+    if (lowerMessage.includes('rate limit') || lowerMessage.includes('quota exceeded') || lowerMessage.includes('api limit')) {
+      return {
+        statusCode: 429,
+        statusText: "Rate Limited",
+        reason: "API调用频率超限，请稍后重试",
+        canRetry: true
+      };
+    }
+    
+    if (lowerMessage.includes('external service') || lowerMessage.includes('third party') || lowerMessage.includes('upstream')) {
+      return {
+        statusCode: 502,
+        statusText: "Bad Gateway",
+        reason: "外部服务不可用",
+        canRetry: true
+      };
+    }
+    
+    if (lowerMessage.includes('certificate') || lowerMessage.includes('ssl') || lowerMessage.includes('tls') || lowerMessage.includes('handshake')) {
+      return {
+        statusCode: 495,
+        statusText: "SSL Certificate Error",
+        reason: "SSL证书错误",
+        canRetry: false
+      };
+    }
+    
+    // 客户端特定错误
+    if (lowerMessage.includes('unsupported') || lowerMessage.includes('not supported') || lowerMessage.includes('incompatible')) {
+      return {
+        statusCode: 400,
+        statusText: "Not Supported",
+        reason: "浏览器或功能不支持",
+        canRetry: false
+      };
+    }
+    
+    if (lowerMessage.includes('offline') || lowerMessage.includes('no internet') || lowerMessage.includes('connection lost')) {
+      return {
+        statusCode: 503,
+        statusText: "Service Unavailable",
+        reason: "网络连接已断开",
+        canRetry: true
       };
     }
     
@@ -88,6 +226,16 @@ export default function Error({ error, reset }) {
               <div><strong>状态码：</strong>{errorInfo.statusCode} {errorInfo.statusText}</div>
               <div><strong>错误原因：</strong>{errorInfo.reason}</div>
               <div><strong>错误详情：</strong><span className="font-mono text-red-600 break-all">{error?.message || "未知错误"}</span></div>
+              {process.env.NODE_ENV === 'development' && error?.stack && (
+                <details className="mt-2">
+                  <summary className="cursor-pointer text-xs text-muted-foreground hover:text-foreground">
+                    查看错误堆栈 (仅开发环境)
+                  </summary>
+                  <pre className="mt-2 text-xs bg-muted p-2 rounded overflow-auto max-h-32 text-red-600">
+                    {error.stack}
+                  </pre>
+                </details>
+              )}
             </div>
           </div>
 

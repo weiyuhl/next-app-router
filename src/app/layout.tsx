@@ -4,6 +4,7 @@ import "./globals.css";
 import ExternalLinkInterceptor from "@/components/ExternalLinkInterceptor";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import MusicPlayer from "@/components/MusicPlayer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +40,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <MusicPlayer />
       </body>
     </html>
   );

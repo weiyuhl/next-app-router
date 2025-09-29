@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { FileText, Layout, Route, Zap, AlertTriangle, Search } from "lucide-react";
+import { FileText, Layout, Route, Zap, AlertTriangle, Search, Loader2 } from "lucide-react";
 
 export default function Home() {
   return (
@@ -99,49 +99,17 @@ export default function Home() {
                 <Card className="bg-card/80 border-border/30 hover:border-primary/50 hover:bg-card/90 transition-all duration-200 hover:shadow-lg cursor-pointer">
                   <CardHeader>
                     <CardTitle className="flex items-center">
-                      <Zap className="w-4 h-4 mr-2 text-primary" />
+                      <Loader2 className="w-4 h-4 mr-2 text-primary" />
                       Loading
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <CardDescription>
-                      loading.js displays a fallback UI while data is loading.
+                      loading.js provides instant loading states for better UX.
                     </CardDescription>
                   </CardContent>
                 </Card>
               </a>
-
-              <a href="/file-conventions/error" className="mb-4 block">
-                <Card className="bg-card/80 border-border/30 hover:border-primary/50 hover:bg-card/90 transition-all duration-200 hover:shadow-lg cursor-pointer">
-                  <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <AlertTriangle className="w-4 h-4 mr-2 text-primary" />
-                      Error
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription>
-                      error.js catches errors and provides a custom fallback UI.
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              </a>
-
-              <Link href="/file-conventions/not-found" className="mb-4 block">
-                <Card className="bg-card/80 border-border/30 hover:border-primary/50 hover:bg-card/90 transition-all duration-200 hover:shadow-lg cursor-pointer">
-                  <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <Search className="w-4 h-4 mr-2 text-primary" />
-                      Not Found
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription>
-                      not-found.js handles custom 404 UI for unfound routes.
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              </Link>
             </div>
           </div>
         </div>

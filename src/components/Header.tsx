@@ -30,8 +30,6 @@ export default function Header() {
       title: "FILE CONVENTIONS",
       links: [
         { href: "/file-conventions/loading", label: "Loading" },
-        { href: "/file-conventions/error", label: "Error" },
-        { href: "/file-conventions/not-found", label: "Not Found" },
       ],
     },
   ];
@@ -42,7 +40,7 @@ export default function Header() {
         {/* Desktop Layout */}
         <div className="hidden lg:flex items-center justify-between">
           <div className="flex items-center space-x-8">
-            <a href={isClient ? window.location.origin : "/"}>
+            <Link href="/">
               <div className="flex items-center space-x-3">
                 <div className="w-6 h-6 rounded-full flex items-center justify-center">
                   <Image
@@ -54,7 +52,7 @@ export default function Header() {
                 </div>
                 <h1 className="text-lg font-semibold">EdgeOne Pages</h1>
               </div>
-            </a>
+            </Link>
             <div className="flex items-center space-x-8">
               {navigationGroups.map((group) => (
                 <div key={group.title} className="flex flex-col">
@@ -80,7 +78,7 @@ export default function Header() {
 
         {/* Mobile Layout */}
         <div className="lg:hidden flex items-center justify-between">
-          <a href={isClient ? window.location.origin : "/"}>
+          <Link href="/">
             <div className="flex items-center space-x-2">
               <div className="w-5 h-5 rounded-full flex items-center justify-center">
                 <Image
@@ -92,7 +90,7 @@ export default function Header() {
               </div>
               <h1 className="text-base font-semibold">EdgeOne Pages</h1>
             </div>
-          </a>
+          </Link>
 
           <div className="flex items-center space-x-3">
             {/* Mobile Menu Button */}
