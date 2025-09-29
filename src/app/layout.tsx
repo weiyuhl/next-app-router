@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Next.js App Router Playground",
-  description: "Interactively demonstrates the core features of Next.js App Router",
+  title: "咏雪轩阁",
+  description: "咏雪轩阁 - 一个优雅的文学与艺术空间",
 };
 
 export default function RootLayout({
@@ -29,7 +29,6 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <head>
-        <link rel="icon" href="/eo-logo-blue.svg" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}

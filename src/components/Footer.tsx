@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Github, Twitter, Mail, Heart } from "lucide-react";
 
 export default function Footer() {
@@ -10,9 +11,16 @@ export default function Footer() {
           {/* 品牌信息容器 */}
           <div className="mb-8">
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-foreground text-left">Next.js App Router</h3>
+              <div className="flex justify-left">
+                 <Image
+                   src="/yongxue-xuange-logo.svg"
+                   alt="咏雪轩阁"
+                   width={160}
+                   height={40}
+                 />
+               </div>
               <p className="text-sm text-muted-foreground text-left">
-                探索 Next.js App Router 的强大功能，学习现代 React 开发最佳实践。
+                咏雪轩阁 - 一个优雅的文学与艺术空间。
               </p>
             </div>
           </div>
@@ -115,9 +123,16 @@ export default function Footer() {
           <div className="grid grid-cols-4 gap-8 max-w-6xl w-full text-center">
             {/* 品牌信息 */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-foreground">Next.js App Router</h3>
+              <div className="flex justify-center">
+                 <Image
+                   src="/yongxue-xuange-logo.svg"
+                   alt="咏雪轩阁"
+                   width={160}
+                   height={40}
+                 />
+               </div>
               <p className="text-sm text-muted-foreground text-left">
-                探索 Next.js App Router 的强大功能，学习现代 React 开发最佳实践。
+                咏雪轩阁 - 一个优雅的文学与艺术空间。
               </p>
             </div>
 
@@ -209,10 +224,10 @@ export default function Footer() {
         {/* 版权信息 */}
         <div className="border-t border-border pt-8 mt-8 text-center">
           <p className="text-sm text-muted-foreground flex items-center justify-center gap-1">
-            Made with <Heart className="w-4 h-4 text-red-500" /> using Next.js App Router
+            Made with <Heart className="w-4 h-4 text-red-500" /> using 咏雪轩阁
           </p>
           <p className="text-xs text-muted-foreground mt-2">
-            © 2024 Next.js App Router Demo. All rights reserved.
+            © 2024 咏雪轩阁. All rights reserved.
           </p>
         </div>
       </div>

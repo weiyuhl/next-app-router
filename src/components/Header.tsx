@@ -41,16 +41,8 @@ export default function Header() {
         <div className="hidden lg:flex items-center justify-between">
           <div className="flex items-center space-x-8">
             <Link href="/">
-              <div className="flex items-center space-x-3">
-                <div className="w-6 h-6 rounded-full flex items-center justify-center">
-                  <Image
-                    src="/eo-logo-blue.svg"
-                    alt="EdgeOne Pages"
-                    width={32}
-                    height={32}
-                  />
-                </div>
-                <h1 className="text-lg font-semibold">EdgeOne Pages</h1>
+              <div className="flex items-center">
+                <h1 className="text-lg font-semibold">咏雪轩阁</h1>
               </div>
             </Link>
             <div className="flex items-center space-x-8">
@@ -79,16 +71,8 @@ export default function Header() {
         {/* Mobile Layout */}
         <div className="lg:hidden flex items-center justify-between">
           <Link href="/">
-            <div className="flex items-center space-x-2">
-              <div className="w-5 h-5 rounded-full flex items-center justify-center">
-                <Image
-                  src="/eo-logo-blue.svg"
-                  alt="EdgeOne Pages"
-                  width={24}
-                  height={24}
-                />
-              </div>
-              <h1 className="text-base font-semibold">EdgeOne Pages</h1>
+            <div className="flex items-center">
+              <h1 className="text-base font-semibold">咏雪轩阁</h1>
             </div>
           </Link>
 
