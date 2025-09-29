@@ -19,22 +19,74 @@ const sampleSongs: Song[] = [
   }
 ];
 
+// 全局音频实例，避免页面导航时重置
+let globalAudio: HTMLAudioElement | null = null;
+let globalIsPlaying = false;
+let globalCurrentSong = 0;
+
 export default function MusicPlayer() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentSong, setCurrentSong] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(globalIsPlaying);
+  const [currentSong, setCurrentSong] = useState(globalCurrentSong);
   const [isCollapsed, setIsCollapsed] = useState(true); // 默认收缩
   const audioRef = useRef<HTMLAudioElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const playerRef = useRef<HTMLDivElement>(null);
 
+  // 初始化全局音频实例
+  useEffect(() => {
+    if (!globalAudio && typeof window !== 'undefined') {
+      globalAudio = new Audio();
+      globalAudio.src = sampleSongs[globalCurrentSong].src;
+      
+      // 监听音频事件
+      globalAudio.addEventListener('ended', () => {
+        const nextIndex = (globalCurrentSong + 1) % sampleSongs.length;
+        globalCurrentSong = nextIndex;
+        globalAudio!.src = sampleSongs[nextIndex].src;
+        if (globalIsPlaying) {
+          globalAudio!.play();
+        }
+        // 更新所有实例的状态
+        window.dispatchEvent(new CustomEvent('musicPlayerUpdate', {
+          detail: { isPlaying: globalIsPlaying, currentSong: globalCurrentSong }
+        }));
+      });
+
+      globalAudio.addEventListener('loadeddata', () => {
+        if (globalIsPlaying) {
+          globalAudio!.play();
+        }
+      });
+    }
+
+    // 监听全局状态更新
+    const handleUpdate = (event: CustomEvent) => {
+      setIsPlaying(event.detail.isPlaying);
+      setCurrentSong(event.detail.currentSong);
+    };
+
+    window.addEventListener('musicPlayerUpdate', handleUpdate as EventListener);
+
+    return () => {
+      window.removeEventListener('musicPlayerUpdate', handleUpdate as EventListener);
+    };
+  }, []);
+
   const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
+    if (globalAudio) {
+      if (globalIsPlaying) {
+        globalAudio.pause();
+        globalIsPlaying = false;
       } else {
-        audioRef.current.play();
+        globalAudio.play();
+        globalIsPlaying = true;
       }
-      setIsPlaying(!isPlaying);
+      setIsPlaying(globalIsPlaying);
+      
+      // 通知其他实例更新状态
+      window.dispatchEvent(new CustomEvent('musicPlayerUpdate', {
+        detail: { isPlaying: globalIsPlaying, currentSong: globalCurrentSong }
+      }));
       
       // 重置3秒定时器
       if (timeoutRef.current) {
@@ -47,8 +99,21 @@ export default function MusicPlayer() {
   };
 
   const nextSong = () => {
-    const nextIndex = (currentSong + 1) % sampleSongs.length;
+    const nextIndex = (globalCurrentSong + 1) % sampleSongs.length;
+    globalCurrentSong = nextIndex;
     setCurrentSong(nextIndex);
+    
+    if (globalAudio) {
+      globalAudio.src = sampleSongs[nextIndex].src;
+      if (globalIsPlaying) {
+        globalAudio.play();
+      }
+    }
+
+    // 通知其他实例更新状态
+    window.dispatchEvent(new CustomEvent('musicPlayerUpdate', {
+      detail: { isPlaying: globalIsPlaying, currentSong: globalCurrentSong }
+    }));
     
     // 重置3秒定时器
     if (timeoutRef.current) {
@@ -60,8 +125,21 @@ export default function MusicPlayer() {
   };
 
   const prevSong = () => {
-    const prevIndex = currentSong === 0 ? sampleSongs.length - 1 : currentSong - 1;
+    const prevIndex = globalCurrentSong === 0 ? sampleSongs.length - 1 : globalCurrentSong - 1;
+    globalCurrentSong = prevIndex;
     setCurrentSong(prevIndex);
+    
+    if (globalAudio) {
+      globalAudio.src = sampleSongs[prevIndex].src;
+      if (globalIsPlaying) {
+        globalAudio.play();
+      }
+    }
+
+    // 通知其他实例更新状态
+    window.dispatchEvent(new CustomEvent('musicPlayerUpdate', {
+      detail: { isPlaying: globalIsPlaying, currentSong: globalCurrentSong }
+    }));
     
     // 重置3秒定时器
     if (timeoutRef.current) {
@@ -82,25 +160,6 @@ export default function MusicPlayer() {
       setIsCollapsed(true);
     }, 3000);
   };
-
-  const handleEnded = () => {
-    nextSong();
-  };
-
-  const handleLoadedData = () => {
-    if (isPlaying && audioRef.current) {
-      audioRef.current.play();
-    }
-  };
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.src = sampleSongs[currentSong].src;
-      if (isPlaying) {
-        audioRef.current.play();
-      }
-    }
-  }, [currentSong]);
 
   // 点击播放器外部区域收缩
   useEffect(() => {
@@ -130,11 +189,7 @@ export default function MusicPlayer() {
 
   return (
     <div className="fixed bottom-8 right-4 z-50" ref={playerRef}>
-      <audio
-        ref={audioRef}
-        onEnded={handleEnded}
-        onLoadedData={handleLoadedData}
-      />
+      {/* 移除本地audio元素，使用全局音频实例 */}
       
       <div className={`bg-white/90 backdrop-blur-sm border rounded-lg shadow-lg transition-all duration-300 ${
         isCollapsed ? 'p-1 opacity-40' : 'p-2'
