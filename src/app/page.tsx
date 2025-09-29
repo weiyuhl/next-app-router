@@ -39,7 +39,7 @@ export default function Home() {
               Layouts
             </h2>
             <div className="space-y-4">
-              <a href="/layouts/nested-layouts" className="mb-4 block">
+              <Link href="/layouts/nested-layouts" className="mb-4 block">
                 <Card className="bg-card/80 border-border/30 hover:border-primary/50 hover:bg-card/90 transition-all duration-200 hover:shadow-lg">
                   <CardHeader>
                     <CardTitle className="flex items-center">
@@ -53,8 +53,8 @@ export default function Home() {
                     </CardDescription>
                   </CardContent>
                 </Card>
-              </a>
-              <a href="/layouts/route-groups" className="mb-4 block">
+              </Link>
+              <Link href="/layouts/route-groups" className="mb-4 block">
                 <Card className="bg-card/80 border-border/30 hover:border-primary/50 hover:bg-card/90 transition-all duration-200 hover:shadow-lg">
                   <CardHeader>
                     <CardTitle className="flex items-center">
@@ -68,8 +68,8 @@ export default function Home() {
                     </CardDescription>
                   </CardContent>
                 </Card>
-              </a>
-              <a href="/layouts/parallel-routes" className="mb-4 block">
+              </Link>
+              <Link href="/layouts/parallel-routes" className="mb-4 block">
                 <Card className="bg-card/80 border-border/30 hover:border-primary/50 hover:bg-card/90 transition-all duration-200 hover:shadow-lg">
                   <CardHeader>
                     <CardTitle className="flex items-center">
@@ -83,7 +83,7 @@ export default function Home() {
                     </CardDescription>
                   </CardContent>
                 </Card>
-              </a>
+              </Link>
 
             </div>
           </div>
@@ -95,7 +95,7 @@ export default function Home() {
               File Conventions
             </h2>
             <div className="space-y-4">
-              <a href="/file-conventions/loading" className="mb-4 block">
+              <Link href="/file-conventions/loading" className="mb-4 block">
                 <Card className="bg-card/80 border-border/30 hover:border-primary/50 hover:bg-card/90 transition-all duration-200 hover:shadow-lg cursor-pointer">
                   <CardHeader>
                     <CardTitle className="flex items-center">
@@ -109,7 +109,7 @@ export default function Home() {
                     </CardDescription>
                   </CardContent>
                 </Card>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

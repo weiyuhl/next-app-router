@@ -34,7 +34,8 @@ function ExternalRedirectContent() {
     // 如果有referrer且不为空，且referrer是同域名的，则返回referrer页面
     if (referrer && referrer.length > 0 && referrer.includes(window.location.origin)) {
       console.log('返回到referrer页面:', referrer);
-      window.location.href = referrer;
+      // 使用router.push而不是window.location.href来避免页面重新加载
+      router.push(new URL(referrer).pathname);
     } else {
       console.log('返回到首页');
       // 否则跳转到首页
