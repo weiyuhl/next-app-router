@@ -39,32 +39,40 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4">
         {/* Desktop Layout */}
         <div className="hidden lg:flex items-center justify-between">
-          <div className="flex items-center space-x-8">
+          {/* 左侧标题 */}
+          <div className="flex items-center">
             <Link href="/">
               <div className="flex items-center">
                 <h1 className="text-lg font-semibold">咏雪轩阁</h1>
               </div>
             </Link>
-            <div className="flex items-center space-x-8">
-              {navigationGroups.map((group) => (
-                <div key={group.title} className="flex flex-col">
-                  <span className="text-sm font-medium text-muted-foreground">
-                    {group.title}
-                  </span>
-                  <div className="flex space-x-4 text-sm">
-                    {group.links.map((link) => (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className="hover:text-primary transition-colors"
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
-                  </div>
+          </div>
+          
+          {/* 居中菜单 */}
+          <div className="flex items-center space-x-8">
+            {navigationGroups.map((group) => (
+              <div key={group.title} className="flex flex-col">
+                <span className="text-sm font-medium text-muted-foreground">
+                  {group.title}
+                </span>
+                <div className="flex space-x-4 text-sm">
+                  {group.links.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* 右侧占位，保持菜单居中 */}
+          <div className="flex items-center">
+            {/* 可以在这里添加右侧内容，如用户头像、设置按钮等 */}
           </div>
         </div>
 
