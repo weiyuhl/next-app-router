@@ -20,7 +20,7 @@ export default function Footer() {
                  />
                </div>
               <p className="text-sm text-muted-foreground text-left">
-                咏雪轩阁 - 一个优雅的文学与艺术空间。
+                <span>咏雪轩阁</span> - 一个优雅的文学与艺术空间。
               </p>
             </div>
           </div>
@@ -132,7 +132,7 @@ export default function Footer() {
                  />
                </div>
               <p className="text-sm text-muted-foreground text-left">
-                咏雪轩阁 - 一个优雅的文学与艺术空间。
+                <span>咏雪轩阁</span> - 一个优雅的文学与艺术空间。
               </p>
             </div>
 
@@ -224,10 +224,10 @@ export default function Footer() {
         {/* 版权信息 */}
         <div className="border-t border-border pt-8 mt-8 text-center">
           <p className="text-sm text-muted-foreground flex items-center justify-center gap-1">
-            Made with <Heart className="w-4 h-4 text-red-500" /> using 咏雪轩阁
+            Made with <Heart className="w-4 h-4 text-red-500" /> using <span>咏雪轩阁</span>
           </p>
           <p className="text-xs text-muted-foreground mt-2">
-            © 2024 咏雪轩阁. All rights reserved.
+            © 2024 <span>咏雪轩阁</span>. All rights reserved.
           </p>
         </div>
       </div>
