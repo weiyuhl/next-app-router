@@ -36,14 +36,14 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/20 bg-card/50 backdrop-blur-sm">
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-2">
         {/* Desktop Layout */}
         <div className="hidden lg:flex items-center justify-between">
           {/* 左侧标题 */}
           <div className="flex items-center">
             <Link href="/">
               <div className="flex items-center">
-                <h1 className="text-lg font-semibold">咏雪轩阁</h1>
+                <h1 className="text-xl font-semibold">咏雪轩阁</h1>
               </div>
             </Link>
           </div>
@@ -77,14 +77,14 @@ export default function Header() {
         </div>
 
         {/* Mobile Layout */}
-        <div className="lg:hidden flex items-center justify-between">
+        <div className="lg:hidden flex items-center justify-center relative">
           <Link href="/">
             <div className="flex items-center">
-              <h1 className="text-base font-semibold">咏雪轩阁</h1>
+              <h1 className="text-lg font-semibold">咏雪轩阁</h1>
             </div>
           </Link>
 
-          <div className="flex items-center space-x-3">
+          <div className="absolute right-0 flex items-center space-x-3">
             {/* Mobile Menu Button */}
             <button
               onClick={toggleMobileMenu}
