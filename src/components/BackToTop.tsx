@@ -21,10 +21,10 @@ export default function BackToTop() {
           clearTimeout(timeoutRef.current);
         }
         
-        // 设置新的5秒计时器
+        // 设置新的3秒计时器
         timeoutRef.current = setTimeout(() => {
           setIsAutoHidden(true);
-        }, 5000);
+        }, 3000);
       } else {
         setIsVisible(false);
         setIsAutoHidden(false);
@@ -54,16 +54,19 @@ export default function BackToTop() {
     });
   };
 
-  // 鼠标悬停时显示按钮并重置计时器
+  // 鼠标悬停时显示按钮并清除计时器
   const handleMouseEnter = () => {
     setIsAutoHidden(false);
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-    // 鼠标离开后重新开始计时
+  };
+
+  // 鼠标离开时重新开始计时
+  const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setIsAutoHidden(true);
-    }, 5000);
+    }, 3000);
   };
 
   return (
@@ -72,6 +75,7 @@ export default function BackToTop() {
         <button
           onClick={scrollToTop}
           onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           className="fixed bottom-24 right-8 z-40 p-3 bg-white text-gray-600 hover:text-gray-800 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 backdrop-blur-sm border border-gray-200 hover:bg-gray-50 hover:border-gray-300"
           aria-label="返回顶部"
         >
