@@ -4,6 +4,7 @@ import ExternalLinkInterceptor from "@/components/ExternalLinkInterceptor";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MusicPlayer from "@/components/MusicPlayer";
+import BackToTop from "@/components/BackToTop";
 
 export const metadata: Metadata = {
   title: "咏雪轩阁",
@@ -30,6 +31,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <MusicPlayer />
+        <BackToTop />
       </body>
     </html>
   );
