@@ -89,8 +89,8 @@ function NotFoundContent() {
   }, [searchParams]);
   
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <main className="container mx-auto px-4 py-8 flex items-center justify-center min-h-[calc(100vh-80px)]">
+    <div className="bg-background text-foreground">
+      <div className="container mx-auto px-4 py-16 flex items-center justify-center min-h-[calc(100vh-200px)]">
         <div className="text-center space-y-6 max-w-md mx-auto px-4">
           {/* Error Icon */}
           <div className="w-24 h-24 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto">
@@ -129,7 +129,7 @@ function NotFoundContent() {
             </Button>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
