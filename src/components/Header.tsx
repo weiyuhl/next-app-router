@@ -8,6 +8,7 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [expandedGroups, setExpandedGroups] = useState<string[]>([]);
+  const [mobileExpandedGroups, setMobileExpandedGroups] = useState<string[]>([]);
 
   useEffect(() => {
     // 标记客户端已挂载
@@ -20,6 +21,14 @@ export default function Header() {
 
   const toggleGroup = (groupTitle: string) => {
     setExpandedGroups(prev => 
+      prev.includes(groupTitle) 
+        ? prev.filter(title => title !== groupTitle)
+        : [...prev, groupTitle]
+    );
+  };
+
+  const toggleMobileGroup = (groupTitle: string) => {
+    setMobileExpandedGroups(prev => 
       prev.includes(groupTitle) 
         ? prev.filter(title => title !== groupTitle)
         : [...prev, groupTitle]
@@ -159,23 +168,51 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="lg:hidden mt-4 pb-4 border-t border-border/20">
             <div className="flex flex-col space-y-6 pt-4">
+              {/* 静态链接 */}
+              {staticLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block px-4 py-2 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              
+              {/* 导航组 */}
               {navigationGroups.map((group) => (
                 <div key={group.title} className="flex flex-col space-y-2">
-                  <span className="text-sm font-medium text-muted-foreground px-4">
-                    {group.title}
-                  </span>
-                  <div className="flex flex-col space-y-1">
-                    {group.links.map((link) => (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className="block px-4 py-2 text-sm text-foreground"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
-                  </div>
+                  <button
+                    onClick={() => toggleMobileGroup(group.title)}
+                    className="flex items-center space-x-1 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors text-left"
+                  >
+                    <span>{group.title}</span>
+                    <svg
+                      className={`w-4 h-4 transition-transform duration-200 ${
+                        mobileExpandedGroups.includes(group.title) ? 'rotate-180' : ''
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  {mobileExpandedGroups.includes(group.title) && (
+                    <div className="flex flex-col space-y-1 pl-4">
+                      {group.links.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          className="block px-4 py-2 text-sm text-foreground hover:text-muted-foreground transition-colors"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
