@@ -11,7 +11,7 @@ interface Song {
 const sampleSongs: Song[] = [
   {
     id: 1,
-    src: 'http://aqqmusic.tc.qq.com/C400000Gxftj3rzxvu.m4a?guid=547591177&vkey=5170575333404C7266130DC2F9D7C00232CE81B6621717184036B4442E0DE3533EBCAD6C93EA03461AEA2E55F331DE610DD3BE3F826600E7__v2b9ab09e&uin=&fromtag=120032'
+    src: '/xg.wav'
   }
 ];
 
@@ -229,7 +229,7 @@ export default function MusicPlayer() {
                 </svg>
               </button>
             ) : (
-              <div className="flex items-center space-x-1.5">
+              <div className="flex items-center space-x-1">
                 <button
                   onClick={prevSong}
                   className="w-7 h-7 p-0 rounded-full flex items-center justify-center"
