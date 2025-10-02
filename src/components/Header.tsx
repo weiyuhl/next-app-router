@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [expandedGroups, setExpandedGroups] = useState<string[]>([]);
 
   useEffect(() => {
     // 标记客户端已挂载
@@ -17,19 +18,33 @@ export default function Header() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const toggleGroup = (groupTitle: string) => {
+    setExpandedGroups(prev => 
+      prev.includes(groupTitle) 
+        ? prev.filter(title => title !== groupTitle)
+        : [...prev, groupTitle]
+    );
+  };
+
+  // 添加首页和关于的独立链接
+  const staticLinks = [
+    { href: "/", label: "首页" },
+    { href: "/about", label: "关于" },
+  ];
+
   const navigationGroups = [
     {
-      title: "LAYOUTS",
+      title: "布局系统",
       links: [
-        { href: "/layouts/nested-layouts", label: "Nested layouts" },
-        { href: "/layouts/route-groups", label: "Route Groups" },
-        { href: "/layouts/parallel-routes", label: "Parallel Routes" },
+        { href: "/layouts/nested-layouts", label: "嵌套布局" },
+        { href: "/layouts/route-groups", label: "路由组" },
+        { href: "/layouts/parallel-routes", label: "并行路由" },
       ],
     },
     {
-      title: "FILE CONVENTIONS",
+      title: "文件约定",
       links: [
-        { href: "/file-conventions/loading", label: "Loading" },
+        { href: "/file-conventions/loading", label: "加载状态" },
       ],
     },
   ];
@@ -48,24 +63,56 @@ export default function Header() {
             </Link>
           </div>
           
-          {/* 居中菜单 */}
+          {/* 居中菜单 - 静态链接 + 可展开的导航组 */}
           <div className="flex items-center space-x-8">
+            {/* 静态链接 */}
+            {staticLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-foreground"
+              >
+                {link.label}
+              </Link>
+            ))}
+            
+            {/* 可展开的导航组 */}
             {navigationGroups.map((group) => (
-              <div key={group.title} className="flex flex-col">
-                <span className="text-sm font-medium text-muted-foreground">
-                  {group.title}
-                </span>
-                <div className="flex space-x-4 text-sm">
-                  {group.links.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className="hover:text-primary transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
+              <div key={group.title} className="relative inline-block">
+                <button
+                  onClick={() => toggleGroup(group.title)}
+                  className="flex items-center space-x-1 text-foreground whitespace-nowrap"
+                >
+                  <span>{group.title}</span>
+                  <svg
+                    className={`w-4 h-4 transition-transform ${
+                      expandedGroups.includes(group.title) ? 'rotate-180' : ''
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                {/* 下拉菜单 */}
+                {expandedGroups.includes(group.title) && (
+                  <div className="absolute top-full left-0 mt-2 bg-card border border-border/20 rounded-md shadow-lg z-50 min-w-full whitespace-nowrap">
+                    <div className="py-2">
+                      {group.links.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          className="block px-4 py-2 text-sm text-foreground"
+                          onClick={() => setExpandedGroups([])}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -122,7 +169,7 @@ export default function Header() {
                       <Link
                         key={link.href}
                         href={link.href}
-                        className="block px-4 py-2 text-sm hover:text-primary hover:bg-accent rounded-md transition-colors"
+                        className="block px-4 py-2 text-sm text-foreground"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         {link.label}
