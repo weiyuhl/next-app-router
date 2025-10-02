@@ -8,7 +8,12 @@ interface Song {
   src: string;
 }
 
-const sampleSongs: Song[] = [];
+const sampleSongs: Song[] = [
+  {
+    id: 1,
+    src: 'http://aqqmusic.tc.qq.com/C400000Gxftj3rzxvu.m4a?guid=547591177&vkey=5170575333404C7266130DC2F9D7C00232CE81B6621717184036B4442E0DE3533EBCAD6C93EA03461AEA2E55F331DE610DD3BE3F826600E7__v2b9ab09e&uin=&fromtag=120032'
+  }
+];
 
 // 全局音频实例，避免页面导航时重置
 let globalAudio: HTMLAudioElement | null = null;
@@ -194,9 +199,34 @@ export default function MusicPlayer() {
             {isCollapsed ? (
               <button
                 onClick={handleCollapsedClick}
-                className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center"
+                className="w-8 h-8 rounded-full flex items-center justify-center relative overflow-hidden"
+                style={{
+                  border: 'none',
+                  cursor: 'pointer'
+                }}
               >
-                {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
+                {/* 旋转的彩虹背景 */}
+                <div 
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: 'conic-gradient(from 0deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe, #667eea)',
+                    animation: isPlaying ? 'spin 3s linear infinite' : 'none'
+                  }}
+                />
+                
+                {/* 固定的音符图标 */}
+                <svg 
+                  width="14" 
+                  height="14" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  className="text-white relative z-10"
+                >
+                  <path 
+                    d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" 
+                    fill="currentColor"
+                  />
+                </svg>
               </button>
             ) : (
               <div className="flex items-center space-x-1.5">

@@ -72,7 +72,7 @@ export default function BackToTop() {
         <button
           onClick={scrollToTop}
           onMouseEnter={handleMouseEnter}
-          className="fixed bottom-16 right-8 z-40 p-3 bg-white text-gray-600 hover:text-gray-800 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 backdrop-blur-sm border border-gray-200 hover:border-gray-300"
+          className="fixed bottom-24 right-8 z-40 p-3 bg-white text-gray-600 hover:text-gray-800 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 backdrop-blur-sm border border-gray-200 hover:bg-gray-50 hover:border-gray-300"
           aria-label="返回顶部"
         >
           <ChevronUp className="w-5 h-5" />
