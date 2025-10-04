@@ -39,6 +39,7 @@ export default function Header() {
   const staticLinks = [
     { href: "/", label: "首页" },
     { href: "/about", label: "关于" },
+    { href: "/code-snap", label: "A" },
   ];
 
   const navigationGroups = [

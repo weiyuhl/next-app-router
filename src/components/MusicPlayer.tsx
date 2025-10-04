@@ -12,6 +12,10 @@ const sampleSongs: Song[] = [
   {
     id: 1,
     src: '/xg.wav'
+  },
+  {
+    id: 2,
+    src: '/l.wav'
   }
 ];
 
