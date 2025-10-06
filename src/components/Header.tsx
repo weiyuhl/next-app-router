@@ -40,6 +40,7 @@ export default function Header() {
     { href: "/", label: "首页" },
     { href: "/about", label: "关于" },
     { href: "/code-snap", label: "A" },
+    { href: "/qingyu", label: "轻语" },
   ];
 
   const navigationGroups = [
