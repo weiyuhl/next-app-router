@@ -193,7 +193,7 @@ export default function Footer() {
             {/* 社交链接 */}
             <div className="space-y-4">
               <h4 className="text-sm font-semibold text-foreground">联系我们</h4>
-              <div className="flex space-x-4">
+              <div className="flex justify-center space-x-4">
                 <a
                   href="https://github.com"
                   target="_blank"
