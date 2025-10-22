@@ -3,16 +3,62 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [expandedGroups, setExpandedGroups] = useState<string[]>([]);
   const [mobileExpandedGroups, setMobileExpandedGroups] = useState<string[]>([]);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+
+  // 页面标题映射
+  const getPageTitle = (path: string) => {
+    const titleMap: { [key: string]: string } = {
+      '/': '咏雪轩阁',
+      '/about': '关于',
+      '/code-snap': 'A',
+      '/qingyu': '轻语',
+      '/layouts/nested-layouts': '嵌套布局',
+      '/layouts/route-groups': '路由组',
+      '/layouts/parallel-routes': '并行路由',
+      '/file-conventions/loading': '加载状态',
+      '/layouts': '布局系统',
+      '/file-conventions': '文件约定',
+    };
+    return titleMap[path] || '咏雪轩阁';
+  };
+
+  const currentPageTitle = getPageTitle(pathname);
+  const isHomePage = pathname === '/';
+  
+  // 判断是否为错误页面或未定义页面
+  const isErrorOrUndefinedPage = currentPageTitle === '咏雪轩阁' && !isHomePage;
+  
+  // 首页和错误页面始终显示居中，其他页面根据滚动状态决定
+  const shouldShowCentered = isHomePage || isErrorOrUndefinedPage || !isScrolled;
 
   useEffect(() => {
     // 标记客户端已挂载
     setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    // 滚动监听
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const threshold = 100; // 滚动阈值
+      setIsScrolled(scrollY > threshold);
+    };
+
+    // 添加滚动监听
+    window.addEventListener('scroll', handleScroll);
+    
+    // 清理函数
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const toggleMobileMenu = () => {
@@ -135,14 +181,39 @@ export default function Header() {
         </div>
 
         {/* Mobile Layout */}
-        <div className="lg:hidden flex items-center justify-center relative">
-          <Link href="/">
-            <div className="flex items-center">
-              <h1 className="text-lg font-semibold">咏雪轩阁</h1>
+        <div className="lg:hidden flex items-center relative">
+          {shouldShowCentered ? (
+            // 居中布局：网站名称居中显示
+            <div className="flex-1 flex items-center justify-center">
+              <Link href="/">
+                <div className="flex items-center">
+                  <h1 className="text-lg font-semibold">咏雪轩阁</h1>
+                </div>
+              </Link>
             </div>
-          </Link>
+          ) : (
+            // 滚动后布局：网站名称在左边，页面标题居中
+            <>
+               {/* 左侧网站名称 */}
+               <div className="flex items-center">
+                 <Link href="/">
+                   <div className="flex items-center">
+                     <h1 className="text-lg font-semibold">咏雪轩阁</h1>
+                   </div>
+                 </Link>
+               </div>
+               
+               {/* 中间页面标题 */}
+               <div className="flex-1 flex items-center justify-center">
+                 <h2 className="text-lg font-semibold">
+                   {currentPageTitle}
+                 </h2>
+               </div>
+             </>
+          )}
 
-          <div className="absolute right-0 flex items-center space-x-3">
+          {/* 右侧菜单按钮 */}
+          <div className="flex items-center">
             {/* Mobile Menu Button */}
             <button
               onClick={toggleMobileMenu}
