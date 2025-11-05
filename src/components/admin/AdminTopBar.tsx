@@ -2,7 +2,16 @@
 
 import { Bell, Search, User, LogOut, Settings, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface AdminTopBarProps {
   onMenuClick?: () => void;
@@ -10,6 +19,8 @@ interface AdminTopBarProps {
 }
 
 export default function AdminTopBar({ onMenuClick, isMobileMenuOpen = false }: AdminTopBarProps) {
+  const router = useRouter();
+
   const handleLogout = async () => {
     // 这里后续会添加登出逻辑
     alert("登出功能将在认证系统完成后实现");
@@ -54,51 +65,46 @@ export default function AdminTopBar({ onMenuClick, isMobileMenuOpen = false }: A
 
       {/* 右侧操作 */}
       <div className="flex items-center space-x-2 lg:space-x-4">
-        {/* 返回前台 - 桌面端显示 */}
-        <Link href="/" className="hidden lg:block">
-          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-            <Home className="w-4 h-4 mr-2" />
-            返回前台
-          </Button>
-        </Link>
-
-        {/* 返回前台 - 移动端图标 */}
-        <Link href="/" className="lg:hidden">
-          <Button variant="ghost" size="icon" title="返回前台">
-            <Home className="w-5 h-5" />
-          </Button>
-        </Link>
-
         {/* 通知 */}
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="w-5 h-5" />
           <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
         </Button>
 
-        {/* 设置 - 桌面端显示 */}
-        <Button variant="ghost" size="icon" className="hidden md:inline-flex">
-          <Settings className="w-5 h-5" />
-        </Button>
-
-        {/* 用户菜单 */}
-        <div className="flex items-center space-x-2 lg:space-x-3 pl-2 lg:pl-3 border-l border-border">
-          <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-            <User className="w-4 h-4 text-primary-foreground" />
-          </div>
-          <div className="hidden lg:block">
-            <p className="text-sm font-medium">管理员</p>
-            <p className="text-xs text-muted-foreground">admin@example.com</p>
-          </div>
-          <Button 
-            variant="ghost" 
-            size="icon"
-            onClick={handleLogout}
-            title="退出登录"
-            className="hidden md:inline-flex"
-          >
-            <LogOut className="w-4 h-4" />
-          </Button>
-        </div>
+        {/* 设置下拉菜单 */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <Settings className="w-5 h-5" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuLabel>
+              <div className="flex flex-col space-y-1">
+                <p className="text-sm font-medium">管理员</p>
+                <p className="text-xs text-muted-foreground">admin@example.com</p>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link href="/" className="flex items-center cursor-pointer">
+                <Home className="w-4 h-4 mr-2" />
+                返回前台
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/settings" className="flex items-center cursor-pointer">
+                <Settings className="w-4 h-4 mr-2" />
+                系统设置
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={handleLogout} className="text-red-600 cursor-pointer">
+              <LogOut className="w-4 h-4 mr-2" />
+              退出登录
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );
