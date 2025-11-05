@@ -47,9 +47,9 @@ export default function AboutPage() {
       <main className="container mx-auto px-4 py-8">
         <div className="mb-6">
           <Button asChild variant="outline" size="sm" className="cursor-pointer">
-            <Link href="/layouts/route-groups">
+            <Link href="/">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              返回路由组演示
+              返回首页
             </Link>
           </Button>
         </div>
@@ -59,7 +59,7 @@ export default function AboutPage() {
             关于我们
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            这个页面现在位于根目录下，可以直接通过 <code className="bg-muted px-2 py-1 rounded text-primary">/about</code> 路径访问
+            这个页面位于前台路由组，可以直接通过 <code className="bg-muted px-2 py-1 rounded text-primary">/about</code> 路径访问
           </p>
         </div>
 
@@ -130,37 +130,11 @@ export default function AboutPage() {
               </div>
             </CardContent>
           </Card>
-
-          {/* 路由组说明 */}
-          <Card className="bg-muted/30 border-border/20">
-            <CardHeader>
-              <CardTitle>页面路由特性</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                <div>
-                  <h4 className="font-medium mb-2">当前路径结构</h4>
-                  <div className="bg-background/50 p-3 rounded border font-mono text-xs">
-                    <div>文件路径: app/about/page.tsx</div>
-                    <div>URL 路径: /about</div>
-                    <div>路由类型: 根目录路由</div>
-                    <div>特性: 直接访问页面</div>
-                  </div>
-                </div>
-                <div>
-                  <h4 className="font-medium mb-2">页面特性</h4>
-                  <ul className="text-muted-foreground space-y-1">
-                    <li>• 位于应用根目录下</li>
-                    <li>• 可直接通过 /about 访问</li>
-                    <li>• 适合公司信息、帮助文档等</li>
-                    <li>• 可进行 SEO 优化</li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </main>
     </div>
   );
 }
+
+
+
