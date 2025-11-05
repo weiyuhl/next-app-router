@@ -12,8 +12,7 @@ import {
   ChevronDown,
   ChevronRight,
 } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
 
 interface NavItem {
   title: string;
@@ -81,21 +80,21 @@ function NavigationContent({ onLinkClick }: { onLinkClick?: () => void }) {
   return (
     <>
       {/* Navigation */}
-      <nav className="p-4 space-y-1">
+      <nav className="px-3 py-3 space-y-1">
         {navigation.map((item) => (
           <div key={item.title}>
             {item.href ? (
               // 单级菜单
               <Link
                 href={item.href}
-                className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
+                className={`flex items-center space-x-2 px-2 py-2 rounded-lg transition-colors ${
                   isActive(item.href)
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 }`}
                 onClick={onLinkClick}
               >
-                <item.icon className="w-5 h-5" />
+                <item.icon className="w-5 h-5 flex-shrink-0" />
                 <span className="font-medium">{item.title}</span>
               </Link>
             ) : (
@@ -103,30 +102,28 @@ function NavigationContent({ onLinkClick }: { onLinkClick?: () => void }) {
               <div>
                 <button
                   onClick={() => toggleExpand(item.title)}
-                  className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-colors ${
+                  className={`w-full flex items-center px-2 py-2 rounded-lg transition-colors ${
                     isParentActive(item.children)
                       ? "bg-muted text-foreground"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >
-                  <div className="flex items-center space-x-3">
-                    <item.icon className="w-5 h-5" />
-                    <span className="font-medium">{item.title}</span>
-                  </div>
+                  <item.icon className="w-5 h-5 flex-shrink-0" />
+                  <span className="font-medium ml-2 flex-1 text-left">{item.title}</span>
                   {expandedItems.includes(item.title) ? (
-                    <ChevronDown className="w-4 h-4" />
+                    <ChevronDown className="w-4 h-4 flex-shrink-0" />
                   ) : (
-                    <ChevronRight className="w-4 h-4" />
+                    <ChevronRight className="w-4 h-4 flex-shrink-0" />
                   )}
                 </button>
 
                 {expandedItems.includes(item.title) && item.children && (
-                  <div className="ml-8 mt-1 space-y-1">
+                  <div className="ml-7 mt-1 space-y-1">
                     {item.children.map((child) => (
                       <Link
                         key={child.href}
                         href={child.href}
-                        className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
+                        className={`block px-2 py-2 rounded-lg text-sm transition-colors ${
                           isActive(child.href)
                             ? "bg-primary text-primary-foreground"
                             : "text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -157,13 +154,13 @@ export default function AdminSidebar({ mobileOpen, setMobileOpen }: AdminSidebar
   return (
     <>
       {/* 桌面端侧边栏 */}
-      <aside className="hidden lg:block w-64 bg-card border-r border-border flex-shrink-0 overflow-y-auto">
+      <aside className="hidden lg:block w-auto bg-card border-r border-border flex-shrink-0 overflow-y-auto">
         <NavigationContent />
       </aside>
 
       {/* 移动端侧边栏 */}
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-        <SheetContent side="left" className="p-0 w-64">
+        <SheetContent side="left" className="p-0 w-auto">
           <div className="h-full bg-card overflow-y-auto">
             <NavigationContent onLinkClick={() => setMobileOpen(false)} />
           </div>
