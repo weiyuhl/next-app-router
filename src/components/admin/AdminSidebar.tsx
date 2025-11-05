@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  LayoutDashboard,
   FileText,
   Users,
   Image as ImageIcon,
@@ -12,7 +11,6 @@ import {
   Settings,
   ChevronDown,
   ChevronRight,
-  Menu,
 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -28,11 +26,6 @@ interface NavItem {
 }
 
 const navigation: NavItem[] = [
-  {
-    title: "仪表盘",
-    icon: LayoutDashboard,
-    href: "/dashboard",
-  },
   {
     title: "内容管理",
     icon: FileText,
@@ -87,16 +80,6 @@ function NavigationContent({ onLinkClick }: { onLinkClick?: () => void }) {
 
   return (
     <>
-      {/* Logo */}
-      <div className="h-16 flex items-center px-6 border-b border-border">
-        <Link href="/dashboard" className="flex items-center space-x-2" onClick={onLinkClick}>
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-lg">咏</span>
-          </div>
-          <span className="font-semibold text-lg">后台管理</span>
-        </Link>
-      </div>
-
       {/* Navigation */}
       <nav className="p-4 space-y-1">
         {navigation.map((item) => (
@@ -165,9 +148,12 @@ function NavigationContent({ onLinkClick }: { onLinkClick?: () => void }) {
 }
 
 // 主组件
-export default function AdminSidebar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+interface AdminSidebarProps {
+  mobileOpen: boolean;
+  setMobileOpen: (open: boolean) => void;
+}
 
+export default function AdminSidebar({ mobileOpen, setMobileOpen }: AdminSidebarProps) {
   return (
     <>
       {/* 桌面端侧边栏 */}
@@ -175,17 +161,8 @@ export default function AdminSidebar() {
         <NavigationContent />
       </aside>
 
-      {/* 移动端菜单按钮 */}
+      {/* 移动端侧边栏 */}
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-        <SheetTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden fixed bottom-4 right-4 z-50 h-14 w-14 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90"
-          >
-            <Menu className="h-6 w-6" />
-          </Button>
-        </SheetTrigger>
         <SheetContent side="left" className="p-0 w-64">
           <div className="h-full bg-card overflow-y-auto">
             <NavigationContent onLinkClick={() => setMobileOpen(false)} />
