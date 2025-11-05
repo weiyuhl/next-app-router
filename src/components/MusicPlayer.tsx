@@ -26,9 +26,8 @@ let globalCurrentSong = 0;
 
 export default function MusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(globalIsPlaying);
-  const [currentSong, setCurrentSong] = useState(globalCurrentSong);
+  const [, setCurrentSong] = useState(globalCurrentSong);
   const [isCollapsed, setIsCollapsed] = useState(true); // 默认收缩
-  const audioRef = useRef<HTMLAudioElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const playerRef = useRef<HTMLDivElement>(null);
 

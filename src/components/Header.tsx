@@ -1,13 +1,11 @@
 'use client'
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isClient, setIsClient] = useState(false);
   const [expandedGroups, setExpandedGroups] = useState<string[]>([]);
   const [mobileExpandedGroups, setMobileExpandedGroups] = useState<string[]>([]);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -38,11 +36,6 @@ export default function Header() {
   
   // 首页和错误页面始终显示居中，其他页面根据滚动状态决定
   const shouldShowCentered = isHomePage || isErrorOrUndefinedPage || !isScrolled;
-
-  useEffect(() => {
-    // 标记客户端已挂载
-    setIsClient(true);
-  }, []);
 
   useEffect(() => {
     // 滚动监听

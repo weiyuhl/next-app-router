@@ -24,14 +24,14 @@ export default function AuthLayout({
         <div className="space-y-6">
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
             <p className="text-white text-sm">
-              "文章千古事，得失寸心知"
+              文章千古事，得失寸心知
             </p>
             <p className="text-blue-100 text-xs mt-2">—— 杜甫</p>
           </div>
           
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
             <p className="text-white text-sm">
-              "读书破万卷，下笔如有神"
+              读书破万卷，下笔如有神
             </p>
             <p className="text-blue-100 text-xs mt-2">—— 杜甫</p>
           </div>
@@ -47,6 +47,3 @@ export default function AuthLayout({
     </div>
   );
 }
-
-
-

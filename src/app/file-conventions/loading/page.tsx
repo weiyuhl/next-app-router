@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FileText, Loader2, Play, ExternalLink } from "lucide-react";
+import { Loader2, Play } from "lucide-react";
 import Link from "next/link";
 
 export default function LoadingPage() {

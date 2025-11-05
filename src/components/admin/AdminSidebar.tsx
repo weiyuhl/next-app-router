@@ -16,7 +16,7 @@ import {
 
 interface NavItem {
   title: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
   href?: string;
   children?: {
     title: string;
