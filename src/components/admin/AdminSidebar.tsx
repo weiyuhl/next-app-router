@@ -12,7 +12,10 @@ import {
   Settings,
   ChevronDown,
   ChevronRight,
+  Menu,
 } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 
 interface NavItem {
   title: string;
@@ -65,7 +68,8 @@ const navigation: NavItem[] = [
   },
 ];
 
-export default function AdminSidebar() {
+// 导航内容组件（桌面端和移动端共用）
+function NavigationContent({ onLinkClick }: { onLinkClick?: () => void }) {
   const pathname = usePathname();
   const [expandedItems, setExpandedItems] = useState<string[]>(["内容管理", "用户管理"]);
 
@@ -82,10 +86,10 @@ export default function AdminSidebar() {
     children?.some((child) => pathname.startsWith(child.href));
 
   return (
-    <aside className="w-64 bg-card border-r border-border flex-shrink-0 overflow-y-auto">
+    <>
       {/* Logo */}
       <div className="h-16 flex items-center px-6 border-b border-border">
-        <Link href="/dashboard" className="flex items-center space-x-2">
+        <Link href="/dashboard" className="flex items-center space-x-2" onClick={onLinkClick}>
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-lg">咏</span>
           </div>
@@ -106,6 +110,7 @@ export default function AdminSidebar() {
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 }`}
+                onClick={onLinkClick}
               >
                 <item.icon className="w-5 h-5" />
                 <span className="font-medium">{item.title}</span>
@@ -143,6 +148,7 @@ export default function AdminSidebar() {
                             ? "bg-primary text-primary-foreground"
                             : "text-muted-foreground hover:bg-muted hover:text-foreground"
                         }`}
+                        onClick={onLinkClick}
                       >
                         {child.title}
                       </Link>
@@ -154,7 +160,39 @@ export default function AdminSidebar() {
           </div>
         ))}
       </nav>
-    </aside>
+    </>
+  );
+}
+
+// 主组件
+export default function AdminSidebar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  return (
+    <>
+      {/* 桌面端侧边栏 */}
+      <aside className="hidden lg:block w-64 bg-card border-r border-border flex-shrink-0 overflow-y-auto">
+        <NavigationContent />
+      </aside>
+
+      {/* 移动端菜单按钮 */}
+      <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+        <SheetTrigger asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden fixed bottom-4 right-4 z-50 h-14 w-14 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90"
+          >
+            <Menu className="h-6 w-6" />
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left" className="p-0 w-64">
+          <div className="h-full bg-card overflow-y-auto">
+            <NavigationContent onLinkClick={() => setMobileOpen(false)} />
+          </div>
+        </SheetContent>
+      </Sheet>
+    </>
   );
 }
 

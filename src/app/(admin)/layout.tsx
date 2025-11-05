@@ -25,7 +25,7 @@ export default function AdminLayout({
         <AdminTopBar />
         
         {/* 页面内容 */}
-        <main className="flex-1 overflow-y-auto bg-background p-6">
+        <main className="flex-1 overflow-y-auto bg-background p-4 lg:p-6 pb-20 lg:pb-6">
           <div className="max-w-7xl mx-auto">
             {children}
           </div>
