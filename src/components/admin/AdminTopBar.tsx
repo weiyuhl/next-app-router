@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, Search, User, LogOut, Settings, Home } from "lucide-react";
+import { Bell, Search, User, LogOut, Settings, Home, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -27,27 +27,20 @@ export default function AdminTopBar({ onMenuClick, isMobileMenuOpen = false }: A
   };
 
   return (
-    <header className="h-16 bg-card border-b border-border flex items-center justify-between px-4 lg:px-6">
-      {/* 左侧：移动端菜单按钮 */}
-      <div className="flex items-center space-x-4">
+    <header className="h-16 bg-card border-b border-border flex items-center justify-between px-4 lg:px-6 shadow-sm">
+      {/* 左侧：移动端菜单按钮 + 搜索 */}
+      <div className="flex items-center space-x-4 flex-1">
         {/* 移动端菜单按钮 */}
         <button
           onClick={onMenuClick}
-          className="lg:hidden p-2 rounded-md text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          className="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
           aria-label="Toggle menu"
         >
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            {isMobileMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
+          {isMobileMenuOpen ? (
+            <X className="w-5 h-5" />
+          ) : (
+            <Menu className="w-5 h-5" />
+          )}
         </button>
 
         {/* 搜索栏 - 桌面端显示 */}
@@ -56,27 +49,33 @@ export default function AdminTopBar({ onMenuClick, isMobileMenuOpen = false }: A
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
-              placeholder="搜索..."
-              className="w-full pl-10 pr-4 py-2 bg-muted/50 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder="搜索内容、用户或设置..."
+              className="w-full pl-10 pr-4 py-2 bg-muted/50 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all"
             />
           </div>
         </div>
       </div>
 
       {/* 右侧操作 */}
-      <div className="flex items-center space-x-2 lg:space-x-4">
-        {/* 通知 */}
-        <Button variant="ghost" size="icon" className="relative">
-          <Bell className="w-5 h-5" />
-          <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-        </Button>
+      <div className="flex items-center space-x-2">
+        {/* 移动端搜索按钮 */}
+        <button className="md:hidden p-2 cursor-pointer">
+          <Search className="w-5 h-5" />
+        </button>
 
-        {/* 设置下拉菜单 */}
+        {/* 通知 */}
+        <button className="relative p-2 cursor-pointer">
+          <Bell className="w-5 h-5" />
+          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full ring-2 ring-card"></span>
+        </button>
+
+        {/* 用户菜单 */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <Settings className="w-5 h-5" />
-            </Button>
+            <button className="flex items-center space-x-2 px-3 py-2 cursor-pointer">
+              <User className="w-5 h-5" />
+              <span className="hidden lg:block text-sm font-medium">管理员</span>
+            </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
             <DropdownMenuLabel>

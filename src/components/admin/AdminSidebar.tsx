@@ -63,7 +63,7 @@ const navigation: NavItem[] = [
 // 导航内容组件（桌面端和移动端共用）
 function NavigationContent({ onLinkClick }: { onLinkClick?: () => void }) {
   const pathname = usePathname();
-  const [expandedItems, setExpandedItems] = useState<string[]>(["内容管理", "用户管理"]);
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
   const toggleExpand = (title: string) => {
     setExpandedItems((prev) =>
@@ -78,69 +78,63 @@ function NavigationContent({ onLinkClick }: { onLinkClick?: () => void }) {
     children?.some((child) => pathname.startsWith(child.href));
 
   return (
-    <>
-      {/* Navigation */}
-      <nav className="px-3 py-3 space-y-1">
-        {navigation.map((item) => (
-          <div key={item.title}>
-            {item.href ? (
-              // 单级菜单
-              <Link
-                href={item.href}
-                className={`flex items-center space-x-2 px-2 py-2 rounded-lg transition-colors ${
-                  isActive(item.href)
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+    <nav className="px-3 py-4 space-y-1">
+      {navigation.map((item) => (
+        <div key={item.title}>
+          {item.href ? (
+            // 单级菜单
+            <Link
+              href={item.href}
+              className={`flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-all duration-200 ${isActive(item.href)
+                ? "bg-primary text-primary-foreground shadow-sm"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 }`}
-                onClick={onLinkClick}
+              onClick={onLinkClick}
+            >
+              <item.icon className="w-5 h-5 flex-shrink-0" />
+              <span className="font-medium text-sm">{item.title}</span>
+            </Link>
+          ) : (
+            // 多级菜单
+            <div>
+              <button
+                onClick={() => toggleExpand(item.title)}
+                className={`w-full flex items-center px-3 py-2.5 rounded-lg transition-all duration-200 ${isParentActive(item.children)
+                  ? "bg-muted text-foreground"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  }`}
               >
                 <item.icon className="w-5 h-5 flex-shrink-0" />
-                <span className="font-medium">{item.title}</span>
-              </Link>
-            ) : (
-              // 多级菜单
-              <div>
-                <button
-                  onClick={() => toggleExpand(item.title)}
-                  className={`w-full flex items-center px-2 py-2 rounded-lg transition-colors ${
-                    isParentActive(item.children)
-                      ? "bg-muted text-foreground"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  }`}
-                >
-                  <item.icon className="w-5 h-5 flex-shrink-0" />
-                  <span className="font-medium ml-2 flex-1 text-left">{item.title}</span>
-                  {expandedItems.includes(item.title) ? (
-                    <ChevronDown className="w-4 h-4 flex-shrink-0" />
-                  ) : (
-                    <ChevronRight className="w-4 h-4 flex-shrink-0" />
-                  )}
-                </button>
-
-                {expandedItems.includes(item.title) && item.children && (
-                  <div className="ml-7 mt-1 space-y-1">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        className={`block px-2 py-2 rounded-lg text-sm transition-colors ${
-                          isActive(child.href)
-                            ? "bg-primary text-primary-foreground"
-                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                        }`}
-                        onClick={onLinkClick}
-                      >
-                        {child.title}
-                      </Link>
-                    ))}
-                  </div>
+                <span className="font-medium text-sm ml-3 flex-1 text-left">{item.title}</span>
+                {expandedItems.includes(item.title) ? (
+                  <ChevronDown className="w-4 h-4 flex-shrink-0 transition-transform duration-200" />
+                ) : (
+                  <ChevronRight className="w-4 h-4 flex-shrink-0 transition-transform duration-200" />
                 )}
-              </div>
-            )}
-          </div>
-        ))}
-      </nav>
-    </>
+              </button>
+
+              {expandedItems.includes(item.title) && item.children && (
+                <div className="ml-8 mt-1 space-y-1 animate-in slide-in-from-top-2 duration-200">
+                  {item.children.map((child) => (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      className={`block px-3 py-2 rounded-lg text-sm transition-all duration-200 ${isActive(child.href)
+                        ? "bg-primary text-primary-foreground shadow-sm"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground hover:pl-4"
+                        }`}
+                      onClick={onLinkClick}
+                    >
+                      {child.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      ))}
+    </nav>
   );
 }
 
@@ -154,7 +148,7 @@ export default function AdminSidebar({ mobileOpen, setMobileOpen }: AdminSidebar
   return (
     <>
       {/* 桌面端侧边栏 */}
-      <aside className="hidden lg:block w-auto bg-card border-r border-border flex-shrink-0 overflow-y-auto">
+      <aside className="hidden lg:block w-64 bg-card border-r border-border flex-shrink-0 shadow-sm overflow-y-auto">
         <NavigationContent />
       </aside>
 

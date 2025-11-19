@@ -12,20 +12,20 @@ export default function AdminLayout({
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="flex flex-col h-screen bg-muted/30">
       {/* 顶部导航栏 */}
-      <AdminTopBar 
-        onMenuClick={() => setMobileOpen(!mobileOpen)} 
+      <AdminTopBar
+        onMenuClick={() => setMobileOpen(!mobileOpen)}
         isMobileMenuOpen={mobileOpen}
       />
-      
+
       {/* 侧边栏和主内容区 */}
       <div className="flex flex-1 overflow-hidden">
         {/* 侧边栏 */}
         <AdminSidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
-        
+
         {/* 页面内容 */}
-        <main className="flex-1 overflow-y-auto bg-background p-4 lg:p-6">
+        <main className="flex-1 overflow-y-auto p-6 lg:p-8">
           <div className="max-w-7xl mx-auto">
             {children}
           </div>
