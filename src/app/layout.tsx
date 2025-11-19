@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Noto_Serif_SC } from "next/font/google";
+
+const notoSerifSC = Noto_Serif_SC({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-noto-serif-sc',
+});
 
 export const metadata: Metadata = {
   title: "咏雪轩阁",
@@ -12,12 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
-      </head>
+    <html lang="zh-CN" className={notoSerifSC.variable} suppressHydrationWarning>
       <body className="antialiased flex flex-col min-h-screen">
         {children}
       </body>
