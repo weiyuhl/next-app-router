@@ -37,15 +37,6 @@ export default function LoginPage() {
   return (
     <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-zinc-100 dark:border-zinc-800 p-8 transition-all duration-300 hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.15)] hover:-translate-y-1">
       <div className="space-y-6">
-        <div className="space-y-2 text-center">
-          <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-            欢迎回来
-          </h1>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
-            请输入您的账号信息以继续
-          </p>
-        </div>
-
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium text-zinc-700 dark:text-zinc-300 ml-1">
